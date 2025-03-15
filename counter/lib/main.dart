@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import 'package:counter/wieght.dart';
+import 'package:counter/countries.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -16,113 +16,74 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   @override
-  List<Color> colors = [
-    Colors.blue,
-    const Color.fromARGB(255, 79, 50, 60),
-    const Color.fromARGB(255, 182, 105, 196),
-    const Color.fromARGB(255, 36, 92, 38),
-    Colors.teal,
-  ];
-  Color color = Colors.deepPurpleAccent;
-  int pointer = 0;
-  // String party = "even";
-  int counter = 1;
-  bool size = true;
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        body: Container(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [colors[pointer].withOpacity(0.9), Colors.white],
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-            ),
-          ),
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              spacing: 30,
-              children: [
-                Container(
-                  alignment: Alignment.center,
-                  height: 100,
-                  width: 190,
-                  child:
-                      counter % 2 == 0
-                          ? Text(
-                            "even : $counter",
-                            style: TextStyle(
-                              fontSize: size ? 20 : 30,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                            ),
-                          )
-                          : Text(
-                            "odd : $counter",
-                            style: TextStyle(
-                              fontSize: size ? 20 : 30,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                            ),
-                          ),
-                  decoration: BoxDecoration(
-                    color: colors[pointer],
-                    borderRadius: BorderRadius.circular(10),
+        body: Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(height: 20),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    spacing: 10,
+                    children: [
+                      CircleAvatar(
+                        backgroundImage: NetworkImage(
+                          "https://images.pexels.com/photos/3278215/pexels-photo-3278215.jpeg?cs=srgb&dl=pexels-freestockpro-3278215.jpg&fm=jpg",
+                        ),
+                      ),
+                      Text("Hello , essraa"),
+                    ],
                   ),
-                ),
-                Text(
-                  "Counter Value",
-                  style: TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold,
-                    color: colors[pointer],
+                  CircleAvatar(
+                    child: Icon(Icons.notification_add_outlined),
+                    maxRadius: 19,
+                    minRadius: 19,
                   ),
+                ],
+              ),
+              Text(
+                "Find Your Stay",
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 8),
+                height: 40,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8),
+                  color: const Color.fromARGB(208, 255, 255, 255),
                 ),
-                Text(
-                  "$counter",
-                  style: TextStyle(
-                    fontSize: 25,
-                    fontWeight: FontWeight.bold,
-                    color: colors[pointer],
-                  ),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  spacing: 20,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    ElevatedButton.icon(
-                      onPressed: () {
-                        if (pointer < colors.length) pointer++;
-                        if (pointer == colors.length) pointer = 0;
-                        setState(() {});
-                      },
-                      icon: Icon(Icons.color_lens),
-                      label: Text("change color"),
+                    Text(
+                      "search here ...",
+                      style: TextStyle(fontSize: 13, color: Colors.grey),
                     ),
-
-                    ElevatedButton.icon(
-                      onPressed: () {
-                        size = !size;
-                        setState(() {});
-                      },
-                      icon: Icon(Icons.sanitizer_outlined),
-                      label: Text("change size"),
+                    Icon(Icons.search, size: 20),
+                  ],
+                ),
+              ),
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: [
+                    Column(
+                      children: [
+                        Text("essraa"),
+                        CircleAvatar(child: Icon(Icons.add)),
+                        Mycountires(networkImage: "travel.jpg", name: "india"),
+                      ],
                     ),
                   ],
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
-        ),
-        floatingActionButton: FloatingActionButton.extended(
-          onPressed: () {
-            counter++;
-            setState(() {});
-          },
-          icon: Icon(Icons.add, color: Colors.white),
-          label: Text("increment", style: TextStyle(color: Colors.white)),
-          backgroundColor: colors[pointer],
         ),
       ),
     );
